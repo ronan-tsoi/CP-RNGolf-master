@@ -72,9 +72,9 @@ class Play extends Phaser.Scene {
                 bottom: 5,
             },
         }
-        this.shotCounter = this.add.text(width / 2, height / 60, this.counter, textConfig)
+        this.shotCounter = this.add.text(width / 2, height / 60, this.counter, textConfig )
         this.totalScore = this.add.text(width / 10, height / 60, this.score, textConfig)
-        this.successfulShotPercentage = this.add.text(width - (width / 5), height / 60, this.ratio, textConfig)
+        this.successfulShotPercentage = this.add.text(width - (width / 5), height / 60, this.ratio + '%', textConfig)
 
         // add pointer input
         this.input.on('pointerdown', (pointer) => {
@@ -93,7 +93,7 @@ class Play extends Phaser.Scene {
             this.ratio = this.score / this.counter
 
             this.shotCounter.text = this.counter
-            this.successfulShotPercentage.text = Phaser.Math.RoundTo(this.ratio, -3)
+            this.successfulShotPercentage.text = Phaser.Math.RoundTo((Phaser.Math.RoundTo(this.ratio, -3) * 100), -1) + '%'
 
         })
 
@@ -108,7 +108,7 @@ class Play extends Phaser.Scene {
             this.ratio = this.score / this.counter
 
             this.totalScore.text = this.score
-            this.successfulShotPercentage.text = Phaser.Math.RoundTo(this.ratio, -3)
+            this.successfulShotPercentage.text = Phaser.Math.RoundTo((Phaser.Math.RoundTo(this.ratio, -3) * 100), -1) + '%'
 
             //as a bonus: randomize wall placements for every ball
             wallA.setX(Phaser.Math.Between(0 + wallA.width / 2, width - wallA.width / 2))
